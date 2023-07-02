@@ -1,12 +1,12 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from '@playwright/test';
 
 for (const width of [575, 767, 991, 1200]) {
-  for (const path of ["", "delivery", "contacts"])
+  for (const path of ['', 'delivery', 'contacts'])
     test(`if width is ${width}px is so '${path}' page is responsive`, async ({
       page,
     }) => {
       page.setViewportSize({ width: width, height: 644 });
-      await page.goto("./" + path);
+      await page.goto('./' + path);
 
       await expect(page).toHaveScreenshot({ fullPage: true });
     });
@@ -17,7 +17,7 @@ for (const width of [575, 767, 991, 1200]) {
     for (let i = 0; i < 12; i++) {
       ids.push(i);
     }
-    const apiUrl = `**\/api\/products`;
+    const apiUrl = `**/api/products`;
     await page.route(apiUrl, async (route) => {
       const json = ids.map((x) => ({
         id: x,
@@ -27,7 +27,7 @@ for (const width of [575, 767, 991, 1200]) {
       await route.fulfill({ json });
     });
     page.setViewportSize({ width: width, height: 644 });
-    await page.goto("./" + "catalog");
+    await page.goto('./' + 'catalog');
 
     await expect(page).toHaveScreenshot({ fullPage: true });
   });
@@ -41,9 +41,9 @@ for (const width of [575, 767, 991, 1200]) {
     }
 
     page.setViewportSize({ width: width, height: 644 });
-    await page.goto("./" + "cart");
+    await page.goto('./' + 'cart');
     await page.evaluate((cart) => {
-      localStorage.setItem("example-store-cart", JSON.stringify(cart));
+      localStorage.setItem('example-store-cart', JSON.stringify(cart));
     }, cart);
 
     await page.reload();
