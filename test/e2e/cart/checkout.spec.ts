@@ -18,7 +18,7 @@ test("cart should show valid id after checkout", async ({ page }) => {
   await page.getByLabel("Address").type("test");
   await page.locator("button.Form-Submit").click();
   await expect(page.locator(".Cart-SuccessMessage")).toHaveScreenshot({
-    mask: [page.locator(".Cart-Number")],
+    mask: [page.locator(".Cart-SuccessMessage p:first-of-type")],
   });
   await expect(+(await page.locator(".Cart-Number").innerText())).toBeLessThan(2**32);
 });
