@@ -36,5 +36,6 @@ test("cart should be saved after reload", async ({ page }) => {
   await page.getByText("Add to Cart").click({ clickCount: 4 });
   await page.goto('./cart');
   const cart = page.locator("table.Cart-Table");
+  await page.reload();
   await expect(cart).toHaveScreenshot();
 });
